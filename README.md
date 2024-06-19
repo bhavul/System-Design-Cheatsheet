@@ -45,7 +45,6 @@
 
 
 ## Other tips
-- Never use a specific tool's name (e.g. Kafka, Redis, Cassandra). You're digging yourself a hole as interviewer can now grill you on it. Instead use generic terminology (in component) column above.
 - Memorize non-functional requirements and be quick at back of the envelope calculations. [Use this link](https://gist.github.com/mwakaba2/8ad25dda8c71fe529855994c70743733). QPS and Storage numbers are often more important than others. To arrive at QPS, go from DAU for Product -> DAU for feature -> Read/Write -> Seconds in the day -> QPS.
 - Going for L4/E4/Intermediate role: Feel free to ask as many Qs to interviewer as you want. Going for L5/E5/Senior role: Lead the interview, make choices yourself, and provide justifications and just 'confirm' with interviewer you're on the right track.
 - First provide a high level design overview with all components you would have, then deep dive into each component and why it is useful, what are its pros and cons.
