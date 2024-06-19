@@ -7,6 +7,11 @@
   System Design Studying can be daunting. It can be useful to have a table to know what problems requires what components, and for those components what caveats they bring and how to mitigate them. This repository gives you a table to serve just this purpose.
 </p>
 
+----
+
+<p align="center"> Your ⭐ on the repo would bring me joy, validate the effort and motivate me to do more like this. ✨ </p>
+
+----
 
 | Use Cases/Problems                                                                                                                 | System Design Problems                                                                                     | Component                       | Advantages                                                  | Caveats/Issues                                      | Mitigations                                                                                                                                        | Examples of Tools                           |
 | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ------------------------------- | ----------------------------------------------------------- | --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------- |
