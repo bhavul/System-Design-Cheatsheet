@@ -60,6 +60,6 @@ Community contributions both for issues and PRs are welcome.
 ## Found it useful?
 Thanks. :) Feel free to leave a star on the repo, or if you can afford it, <a href="https://www.buymeacoffee.com/bhavul" target="_blank"><img src="https://img.shields.io/badge/-buy_me_a%C2%A0coffee-gray?logo=buy-me-a-coffee" alt="Buy Me A Coffee"></a>.
 
-Feel free to connect / follow.
+Feel free to connect to stay updated. 
 - LinkedIn : [![Linkedin: bhavul](https://img.shields.io/badge/-bhavul-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/bhavul/)](https://www.linkedin.com/in/bhavul/)
 - X : [![Twitter Follow](https://img.shields.io/twitter/follow/bhavulgauri.svg?style=social)](http://twitter.com/bhavulgauri)
