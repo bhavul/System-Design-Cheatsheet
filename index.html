@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>System Design Component Recommender</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -19,6 +20,25 @@
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
+            border: none;
+        }
+        
+        .recommendation-item {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #4895ef;
+        }
+        
+        .btn-primary {
+            background-color: #4361ee;
+            border-color: #4361ee;
+        }
+        
+        .form-check-input:checked {
+            background-color: #4361ee;
+            border-color: #4361ee;
         }
     </style>
 </head>
@@ -26,7 +46,9 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="#">System Design Recommender</a>
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-diagram-3"></i> System Design Recommender
+            </a>
         </div>
     </nav>
 
@@ -43,7 +65,7 @@
             <!-- Form Section -->
             <div class="col-lg-6">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header bg-white">
                         <h4 class="mb-0">System Requirements</h4>
                     </div>
                     <div class="card-body">
@@ -153,7 +175,7 @@
                                 </div>
                             </div>
                             
-                            <button type="submit" class="btn btn-primary">Generate Recommendations</button>
+                            <button type="submit" class="btn btn-primary w-100">Generate Recommendations</button>
                         </form>
                     </div>
                 </div>
@@ -162,12 +184,15 @@
             <!-- Results Section -->
             <div class="col-lg-6">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header bg-white">
                         <h4 class="mb-0">Recommended Components</h4>
                     </div>
                     <div class="card-body">
                         <div id="results-container">
-                            <p class="text-center">Fill out the form to get personalized system design recommendations.</p>
+                            <div class="text-center py-3">
+                                <i class="bi bi-arrow-left-circle" style="font-size: 50px; color: #4895ef;"></i>
+                                <p class="mt-3">Fill out the form to get personalized system design recommendations.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -182,5 +207,137 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Simple component database
+        const componentDatabase = {
+            "Load Balancer": "Distributes high traffic to maintain availability.",
+            "Data Replication": "Replicates data across nodes for fault tolerance.",
+            "SQL Database": "Provides ACID compliance and strong consistency.",
+            "NoSQL Database": "Scales horizontally with eventual consistency.",
+            "Cache": "Reduces latency by serving frequently accessed data quickly.",
+            "In-Memory Database": "Offers ultra-fast data retrieval.",
+            "Message Broker": "Handles asynchronous, real-time data flow.",
+            "Data Streaming Platform": "Processes continuous streams of data.",
+            "API Gateway": "Centralizes client requests and authentication.",
+            "Service Registry": "Tracks and manages microservice instances.",
+            "Service Mesh": "Manages secure inter-service communication.",
+            "Distributed Tracing": "Helps diagnose issues across microservices.",
+            "CDN": "Delivers content globally with reduced latency.",
+            "File Storage": "Efficiently stores large, unstructured data.",
+            "Monitoring System": "Tracks system performance and alerts on anomalies.",
+            "Logging System": "Centralizes logs for troubleshooting and auditing."
+        };
+
+        // Function to get form values
+        function getFormValues() {
+            return {
+                traffic: document.getElementById('traffic').value,
+                availability: document.querySelector('input[name="availability"]:checked').value,
+                consistency: document.querySelector('input[name="consistency"]:checked').value,
+                latency: document.querySelector('input[name="latency"]:checked').value,
+                realtime: document.querySelector('input[name="realtime"]:checked').value,
+                microservices: document.querySelector('input[name="microservices"]:checked').value,
+                caching: document.querySelector('input[name="caching"]:checked').value,
+                content: document.querySelector('input[name="content"]:checked').value,
+                logging: document.querySelector('input[name="logging"]:checked').value
+            };
+        }
+
+        // Function to generate recommendations based on form values
+        function generateRecommendations(formValues) {
+            const recommendations = {};
+            
+            if (formValues.traffic === "high") {
+                recommendations["Load Balancer"] = componentDatabase["Load Balancer"];
+            }
+            
+            if (formValues.availability === "yes") {
+                recommendations["Data Replication"] = componentDatabase["Data Replication"];
+            }
+            
+            if (formValues.consistency === "strong") {
+                recommendations["SQL Database"] = componentDatabase["SQL Database"];
+            } else if (formValues.consistency === "eventual") {
+                recommendations["NoSQL Database"] = componentDatabase["NoSQL Database"];
+            }
+            
+            if (formValues.latency === "yes") {
+                recommendations["Cache"] = componentDatabase["Cache"];
+                recommendations["In-Memory Database"] = componentDatabase["In-Memory Database"];
+            }
+            
+            if (formValues.realtime === "yes") {
+                recommendations["Message Broker"] = componentDatabase["Message Broker"];
+                recommendations["Data Streaming Platform"] = componentDatabase["Data Streaming Platform"];
+            }
+            
+            if (formValues.microservices === "yes") {
+                recommendations["API Gateway"] = componentDatabase["API Gateway"];
+                recommendations["Service Registry"] = componentDatabase["Service Registry"];
+                recommendations["Service Mesh"] = componentDatabase["Service Mesh"];
+                recommendations["Distributed Tracing"] = componentDatabase["Distributed Tracing"];
+            }
+            
+            if (formValues.caching === "yes" && !recommendations["Cache"]) {
+                recommendations["Cache"] = componentDatabase["Cache"];
+            }
+            
+            if (formValues.content === "yes") {
+                recommendations["CDN"] = componentDatabase["CDN"];
+                recommendations["File Storage"] = componentDatabase["File Storage"];
+            }
+            
+            if (formValues.logging === "yes") {
+                recommendations["Monitoring System"] = componentDatabase["Monitoring System"];
+                recommendations["Logging System"] = componentDatabase["Logging System"];
+            }
+            
+            return recommendations;
+        }
+
+        // Function to display recommendations in the UI
+        function displayRecommendations(recommendations) {
+            const resultsContainer = document.getElementById('results-container');
+            resultsContainer.innerHTML = '';
+            
+            if (Object.keys(recommendations).length === 0) {
+                resultsContainer.innerHTML = `
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle me-2"></i>
+                        No specific components recommended based on your inputs. Try adjusting your requirements.
+                    </div>
+                `;
+                return;
+            }
+            
+            resultsContainer.innerHTML += `
+                <div class="alert alert-success mb-4">
+                    <i class="bi bi-check-circle me-2"></i>
+                    <strong>${Object.keys(recommendations).length} components</strong> recommended based on your requirements.
+                </div>
+            `;
+            
+            for (const [component, description] of Object.entries(recommendations)) {
+                const componentDiv = document.createElement('div');
+                componentDiv.className = 'recommendation-item';
+                componentDiv.innerHTML = `
+                    <h5 class="mb-2">
+                        <i class="bi bi-gear me-2"></i>
+                        ${component}
+                    </h5>
+                    <p class="mb-0">${description}</p>
+                `;
+                resultsContainer.appendChild(componentDiv);
+            }
+        }
+
+        // Form submission handler
+        document.getElementById('requirements-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formValues = getFormValues();
+            const recommendations = generateRecommendations(formValues);
+            displayRecommendations(recommendations);
+        });
+    </script>
 </body>
 </html>
