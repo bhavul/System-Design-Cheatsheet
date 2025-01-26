@@ -7,20 +7,36 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4895ef;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+        }
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f5f7fa;
+            color: var(--dark-color);
+            line-height: 1.6;
         }
         
         .navbar {
-            background-color: #4361ee;
+            background-color: var(--primary-color);
         }
         
         .card {
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             margin-bottom: 20px;
             border: none;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
         
         .recommendation-item {
@@ -28,17 +44,80 @@
             border-radius: 8px;
             padding: 15px;
             margin-bottom: 15px;
-            border-left: 4px solid #4895ef;
+            border-left: 4px solid var(--accent-color);
         }
         
         .btn-primary {
-            background-color: #4361ee;
-            border-color: #4361ee;
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            color: white;
         }
         
         .form-check-input:checked {
-            background-color: #4361ee;
-            border-color: #4361ee;
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .form-label {
+            font-weight: 500;
+        }
+        
+        .tab-content {
+            padding: 20px 0;
+        }
+        
+        .nav-tabs .nav-link {
+            color: var(--dark-color);
+        }
+        
+        .nav-tabs .nav-link.active {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        .component-details {
+            display: none;
+            background-color: #f0f8ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        
+        .badge-component {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            display: inline-block;
+            font-weight: normal;
+        }
+        
+        .collapse-icon {
+            transition: transform 0.3s;
+        }
+        
+        .rotated {
+            transform: rotate(180deg);
+        }
+        
+        .table-container {
+            overflow-x: auto;
         }
     </style>
 </head>
@@ -49,21 +128,41 @@
             <a class="navbar-brand" href="#">
                 <i class="bi bi-diagram-3"></i> System Design Recommender
             </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#form-section">Recommender</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#reference-section">References</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 
     <!-- Header -->
     <header class="bg-light py-5">
         <div class="container">
-            <h1 class="fw-bold">System Design Component Recommender</h1>
-            <p class="lead">Select your requirements to get personalized system design component recommendations.</p>
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="fw-bold">System Design Component Recommender</h1>
+                    <p class="lead">Select your requirements to get personalized system design component recommendations with explanations, caveats, and mitigation strategies.</p>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <i class="bi bi-diagram-3" style="font-size: 100px; color: var(--primary-color);"></i>
+                </div>
+            </div>
         </div>
     </header>
 
     <div class="container my-5">
         <div class="row">
             <!-- Form Section -->
-            <div class="col-lg-6">
+            <div class="col-lg-5" id="form-section">
                 <div class="card">
                     <div class="card-header bg-white">
                         <h4 class="mb-0">System Requirements</h4>
@@ -175,6 +274,30 @@
                                 </div>
                             </div>
                             
+                            <div class="mb-3">
+                                <label class="form-label">Data Analytics Required?</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="analytics" id="analytics-yes" value="yes">
+                                    <label class="form-check-label" for="analytics-yes">Yes</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="analytics" id="analytics-no" value="no" checked>
+                                    <label class="form-check-label" for="analytics-no">No</label>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Advanced Search Capabilities?</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="search" id="search-yes" value="yes">
+                                    <label class="form-check-label" for="search-yes">Yes</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="search" id="search-no" value="no" checked>
+                                    <label class="form-check-label" for="search-no">No</label>
+                                </div>
+                            </div>
+                            
                             <button type="submit" class="btn btn-primary w-100">Generate Recommendations</button>
                         </form>
                     </div>
@@ -182,16 +305,182 @@
             </div>
             
             <!-- Results Section -->
-            <div class="col-lg-6">
-                <div class="card">
+            <div class="col-lg-7">
+                <div class="card mb-4">
                     <div class="card-header bg-white">
                         <h4 class="mb-0">Recommended Components</h4>
                     </div>
                     <div class="card-body">
                         <div id="results-container">
-                            <div class="text-center py-3">
-                                <i class="bi bi-arrow-left-circle" style="font-size: 50px; color: #4895ef;"></i>
+                            <div class="text-center py-5">
+                                <i class="bi bi-arrow-left-circle" style="font-size: 50px; color: var(--accent-color);"></i>
                                 <p class="mt-3">Fill out the form to get personalized system design recommendations.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Reference Section -->
+                <div class="card" id="reference-section">
+                    <div class="card-header bg-white">
+                        <h4 class="mb-0">System Design Reference</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="nav nav-tabs" id="reference-tabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="components-tab" data-bs-toggle="tab" data-bs-target="#components" type="button" role="tab">Components</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="calculations-tab" data-bs-toggle="tab" data-bs-target="#calculations" type="button" role="tab">Calculations</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="patterns-tab" data-bs-toggle="tab" data-bs-target="#patterns" type="button" role="tab">Design Patterns</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="reference-tabs-content">
+                            <div class="tab-pane fade show active" id="components" role="tabpanel">
+                                <div class="table-container">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Component</th>
+                                                <th>What It Solves</th>
+                                                <th>Caveats</th>
+                                                <th>Examples</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><strong>Load Balancer</strong></td>
+                                                <td>Distributes traffic across workers, improves reliability and availability.</td>
+                                                <td>Single point of failure, adds complexity.</td>
+                                                <td>Nginx, HAProxy, AWS ELB</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>SQL Database</strong></td>
+                                                <td>Strong ACID properties, structured data, complex queries.</td>
+                                                <td>Limited scalability, schema management.</td>
+                                                <td>MySQL, PostgreSQL, MS SQL Server</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>NoSQL Database</strong></td>
+                                                <td>Flexible schema, horizontal scalability, high performance.</td>
+                                                <td>Eventual consistency, limited transaction support.</td>
+                                                <td>MongoDB, Cassandra, DynamoDB</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Cache</strong></td>
+                                                <td>Reduces latency, decreases load on databases.</td>
+                                                <td>Cache consistency issues, potential for stale data.</td>
+                                                <td>Redis, Memcached</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Message Broker</strong></td>
+                                                <td>Facilitates message exchange, supports multiple patterns.</td>
+                                                <td>Bottleneck potential, delivery guarantees.</td>
+                                                <td>Apache Kafka, RabbitMQ, ActiveMQ</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>API Gateway</strong></td>
+                                                <td>Single entry point, manages authentication and routing.</td>
+                                                <td>Can become a bottleneck, adds latency.</td>
+                                                <td>Kong, Apigee, AWS API Gateway</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Service Registry</strong></td>
+                                                <td>Tracks services and their instances.</td>
+                                                <td>High availability required, consistency issues.</td>
+                                                <td>Consul, Eureka, Zookeeper</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="calculations" role="tabpanel">
+                                <h5>Powers of Two Table</h5>
+                                <div class="table-container">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Power</th>
+                                                <th>Approx Value (Bytes)</th>
+                                                <th>Bytes</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>10</td>
+                                                <td>1 thousand</td>
+                                                <td>1 KB</td>
+                                            </tr>
+                                            <tr>
+                                                <td>20</td>
+                                                <td>1 million</td>
+                                                <td>1 MB</td>
+                                            </tr>
+                                            <tr>
+                                                <td>30</td>
+                                                <td>1 billion</td>
+                                                <td>1 GB</td>
+                                            </tr>
+                                            <tr>
+                                                <td>40</td>
+                                                <td>1 trillion</td>
+                                                <td>1 TB</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                                <h5 class="mt-4">Latency Comparison Numbers</h5>
+                                <ul class="list-group">
+                                    <li class="list-group-item">L1 cache can be accessed 14x faster than L2 cache.</li>
+                                    <li class="list-group-item">Read sequentially from main memory at 4 GB/sec.</li>
+                                    <li class="list-group-item">Read randomly/sequentially from SSD at ~ 1 GB/sec.</li>
+                                    <li class="list-group-item">Read sequentially from disk at 30 MB/sec.</li>
+                                    <li class="list-group-item">Round-trips within a data center at 2,000 trips/sec.</li>
+                                </ul>
+                                
+                                <h5 class="mt-4">Request Calculations</h5>
+                                <ul class="list-group">
+                                    <li class="list-group-item">2.5 million seconds per month</li>
+                                    <li class="list-group-item">1 million reqs/month → 0.4 reqs/sec</li>
+                                    <li class="list-group-item">10 million reqs/month → 4 reqs/sec</li>
+                                    <li class="list-group-item">100 million reqs/month → 40 reqs/sec</li>
+                                </ul>
+                            </div>
+                            <div class="tab-pane fade" id="patterns" role="tabpanel">
+                                <h5>Common System Design Patterns</h5>
+                                <div class="accordion" id="patternAccordion">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                                Microservices Architecture
+                                            </button>
+                                        </h2>
+                                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#patternAccordion">
+                                            <div class="accordion-body">
+                                                <p>Microservices architecture is an approach to developing a single application as a suite of small services, each running in its own process and communicating with lightweight mechanisms, often an HTTP resource API.</p>
+                                                <p><strong>Benefits:</strong> Independent deployment, technological diversity, fault isolation.</p>
+                                                <p><strong>Challenges:</strong> Distributed system complexity, eventual consistency, network unreliability.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                                Event-Driven Architecture
+                                            </button>
+                                        </h2>
+                                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#patternAccordion">
+                                            <div class="accordion-body">
+                                                <p>Event-driven architecture promotes the production, detection, consumption of, and reaction to events. This architectural pattern can be applied to systems that process events asynchronously.</p>
+                                                <p><strong>Benefits:</strong> Loose coupling, better scalability, improved responsiveness.</p>
+                                                <p><strong>Challenges:</strong> Complex debugging, maintaining event order, event versioning.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -201,31 +490,199 @@
     </div>
 
     <footer class="bg-dark text-white py-4 mt-5">
-        <div class="container text-center">
-            <p>&copy; 2025 System Design Component Recommender</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>System Design Component Recommender</h5>
+                    <p>A tool to help with system design decisions based on your requirements.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Resources</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="https://github.com/donnemartin/system-design-primer" class="text-white">System Design Primer</a></li>
+                        <li><a href="https://gist.github.com/mwakaba2/8ad25dda8c71fe529855994c70743733" class="text-white">System Design Numbers</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Connect</h5>
+                    <div class="social-links">
+                        <a href="https://github.com" class="text-white me-3"><i class="bi bi-github"></i></a>
+                        <a href="https://twitter.com" class="text-white me-3"><i class="bi bi-twitter"></i></a>
+                        <a href="https://linkedin.com" class="text-white"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="mt-4 mb-3" style="background-color: rgba(255,255,255,0.2);">
+            <p class="text-center mb-0">&copy; 2025 System Design Component Recommender</p>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Simple component database
+        // Enhanced component database with details
         const componentDatabase = {
-            "Load Balancer": "Distributes high traffic to maintain availability.",
-            "Data Replication": "Replicates data across nodes for fault tolerance.",
-            "SQL Database": "Provides ACID compliance and strong consistency.",
-            "NoSQL Database": "Scales horizontally with eventual consistency.",
-            "Cache": "Reduces latency by serving frequently accessed data quickly.",
-            "In-Memory Database": "Offers ultra-fast data retrieval.",
-            "Message Broker": "Handles asynchronous, real-time data flow.",
-            "Data Streaming Platform": "Processes continuous streams of data.",
-            "API Gateway": "Centralizes client requests and authentication.",
-            "Service Registry": "Tracks and manages microservice instances.",
-            "Service Mesh": "Manages secure inter-service communication.",
-            "Distributed Tracing": "Helps diagnose issues across microservices.",
-            "CDN": "Delivers content globally with reduced latency.",
-            "File Storage": "Efficiently stores large, unstructured data.",
-            "Monitoring System": "Tracks system performance and alerts on anomalies.",
-            "Logging System": "Centralizes logs for troubleshooting and auditing."
+            "Load Balancer": {
+                description: "Distributes high traffic to maintain availability.",
+                details: "Load balancers distribute network traffic across multiple servers to ensure high availability and reliability by sending requests only to servers that are online and capable of fulfilling those requests.",
+                benefits: ["Increases system availability", "Prevents any single server from becoming overwhelmed", "Provides flexibility to add/remove servers"],
+                caveats: ["Can become a single point of failure", "Adds complexity to the system", "May introduce additional latency"],
+                mitigations: ["Use multiple load balancers in different regions", "Implement health checks", "Use DNS-based load balancing"],
+                examples: ["Nginx", "HAProxy", "AWS Elastic Load Balancing"],
+                icon: "bi-diagram-3"
+            },
+            "Data Replication": {
+                description: "Replicates data across nodes for fault tolerance.",
+                details: "Data replication involves maintaining copies of the same data in multiple locations to improve data availability, fault tolerance, and access performance.",
+                benefits: ["Improves data availability", "Enhances fault tolerance", "Reduces access latency for geographically distributed users"],
+                caveats: ["Consistency challenges across replicas", "Increased storage costs", "Replication lag"],
+                mitigations: ["Implement conflict resolution strategies", "Use appropriate consistency models", "Monitor replication lag"],
+                examples: ["MySQL Replication", "MongoDB Replica Sets", "Amazon RDS Multi-AZ"],
+                icon: "bi-database-check"
+            },
+            "SQL Database": {
+                description: "Provides ACID compliance and strong consistency.",
+                details: "SQL databases use structured query language for defining and manipulating data, providing ACID properties (Atomicity, Consistency, Isolation, Durability) for reliable transactions.",
+                benefits: ["Strong consistency", "Complex query capabilities", "Well-established standards"],
+                caveats: ["Scaling challenges", "Schema rigidity", "Performance limitations at high scale"],
+                mitigations: ["Implement sharding", "Use read replicas", "Optimize query performance"],
+                examples: ["MySQL", "PostgreSQL", "Microsoft SQL Server"],
+                icon: "bi-table"
+            },
+            "NoSQL Database": {
+                description: "Scales horizontally with eventual consistency.",
+                details: "NoSQL databases provide flexible schemas and horizontal scalability for handling large volumes of unstructured data, often relaxing consistency for better performance and availability.",
+                benefits: ["Horizontal scalability", "Flexible schema", "High performance for specific workloads"],
+                caveats: ["Eventual consistency model", "Limited transaction support", "Query limitations"],
+                mitigations: ["Use consistency tuning options", "Design for idempotent operations", "Implement application-level transactions"],
+                examples: ["MongoDB", "Cassandra", "Amazon DynamoDB"],
+                icon: "bi-database"
+            },
+            "Cache": {
+                description: "Reduces latency by serving frequently accessed data quickly.",
+                details: "Caching stores copies of frequently accessed data in a high-speed data storage layer to reduce data retrieval latency and decrease the load on the primary data store.",
+                benefits: ["Reduces latency", "Decreases database load", "Improves user experience"],
+                caveats: ["Cache invalidation challenges", "Cache coherence issues", "Memory limitations"],
+                mitigations: ["Implement effective invalidation strategies", "Use TTL (Time To Live)", "Implement cache-aside pattern"],
+                examples: ["Redis", "Memcached", "AWS ElastiCache"],
+                icon: "bi-hdd-rack"
+            },
+            "In-Memory Database": {
+                description: "Offers ultra-fast data retrieval.",
+                details: "In-memory databases store data primarily in system memory rather than on disk, enabling significantly faster data access at the cost of data volatility.",
+                benefits: ["Extremely low latency", "High throughput", "Reduced disk I/O bottlenecks"],
+                caveats: ["Limited by memory size", "Data volatility", "Higher cost per GB of storage"],
+                mitigations: ["Implement persistence options", "Use backup strategies", "Combine with disk-based storage for less-accessed data"],
+                examples: ["Redis", "SAP HANA", "MemSQL"],
+                icon: "bi-memory"
+            },
+            "Message Broker": {
+                description: "Handles asynchronous, real-time data flow.",
+                details: "Message brokers facilitate communication between distributed systems by receiving messages from producers and routing them to appropriate consumers, often implementing reliable queueing and publish-subscribe patterns.",
+                benefits: ["Decouples services", "Provides asynchronous communication", "Enables event-driven architecture"],
+                caveats: ["Possible bottleneck", "Message delivery guarantees", "Additional complexity"],
+                mitigations: ["Scale horizontally", "Implement proper error handling", "Set appropriate message TTL"],
+                examples: ["Apache Kafka", "RabbitMQ", "Amazon SQS"],
+                icon: "bi-envelope"
+            },
+            "Data Streaming Platform": {
+                description: "Processes continuous streams of data.",
+                details: "Data streaming platforms handle and process continuous, real-time data streams, allowing for immediate insights and actions on data as it's generated.",
+                benefits: ["Real-time processing", "Scalable stream handling", "Support for complex event processing"],
+                caveats: ["High operational complexity", "Resource-intensive", "Requiring careful tuning"],
+                mitigations: ["Use managed services", "Implement proper monitoring", "Design for fault tolerance"],
+                examples: ["Apache Kafka", "Apache Flink", "Amazon Kinesis"],
+                icon: "bi-activity"
+            },
+            "API Gateway": {
+                description: "Centralizes client requests and authentication.",
+                details: "API gateways serve as entry points for client applications, handling authentication, request routing, rate limiting, and traffic management across microservices.",
+                benefits: ["Centralized entry point", "Security enforcement", "Protocol translation"],
+                caveats: ["Single point of failure", "Potential latency increase", "Configuration complexity"],
+                mitigations: ["Deploy multiple instances", "Use caching", "Implement circuit breakers"],
+                examples: ["Kong", "Amazon API Gateway", "Azure API Management"],
+                icon: "bi-shuffle"
+            },
+            "Service Registry": {
+                description: "Tracks and manages microservice instances.",
+                details: "Service registries maintain a database of available service instances, enabling dynamic service discovery in distributed systems.",
+                benefits: ["Dynamic service discovery", "Load balancing support", "Health monitoring"],
+                caveats: ["Consistency in distributed environment", "Additional infrastructure requirement", "Configuration complexity"],
+                mitigations: ["Use consensus algorithms", "Implement regular health checks", "Deploy in high-availability mode"],
+                examples: ["Consul", "Eureka", "Zookeeper"],
+                icon: "bi-card-list"
+            },
+            "Service Mesh": {
+                description: "Manages secure inter-service communication.",
+                details: "Service meshes provide dedicated infrastructure layer for handling service-to-service communication, offering features like traffic management, security, and observability without changing application code.",
+                benefits: ["Enhanced observability", "Traffic control", "Security policy enforcement"],
+                caveats: ["Increased complexity", "Performance overhead", "Operational burden"],
+                mitigations: ["Start with simple deployment", "Monitor performance", "Use managed service mesh offerings"],
+                examples: ["Istio", "Linkerd", "Consul Connect"],
+                icon: "bi-diagram-2"
+            },
+            "Distributed Tracing": {
+                description: "Helps diagnose issues across microservices.",
+                details: "Distributed tracing follows requests as they propagate through distributed systems, helping to identify performance bottlenecks and troubleshoot issues across service boundaries.",
+                benefits: ["End-to-end visibility", "Performance issue identification", "Understanding dependencies"],
+                caveats: ["Instrumentation overhead", "Data volume", "Sampling decisions"],
+                mitigations: ["Use adaptive sampling", "Implement efficient storage solutions", "Focus on critical paths"],
+                examples: ["Jaeger", "Zipkin", "AWS X-Ray"],
+                icon: "bi-graph-up"
+            },
+            "CDN": {
+                description: "Delivers content globally with reduced latency.",
+                details: "Content Delivery Networks distribute content to servers located close to users worldwide, reducing latency and improving availability by serving content from nearby edge locations.",
+                benefits: ["Reduced latency", "Increased availability", "DDoS protection"],
+                caveats: ["Cache invalidation challenges", "Cost for infrequently accessed content", "Configuration complexity"],
+                mitigations: ["Implement effective invalidation strategies", "Optimize for cacheable content", "Use CDN analytics"],
+                examples: ["Cloudflare", "Akamai", "Amazon CloudFront"],
+                icon: "bi-globe"
+            },
+            "File Storage": {
+                description: "Efficiently stores large, unstructured data.",
+                details: "File storage systems handle large volumes of unstructured data like documents, images, and videos, providing scalable access across distributed systems.",
+                benefits: ["Scalable capacity", "Support for unstructured data", "Accessibility from multiple systems"],
+                caveats: ["Access latency", "Consistency challenges", "Cost at scale"],
+                mitigations: ["Implement tiered storage", "Use regional storage options", "Optimize for access patterns"],
+                examples: ["Amazon S3", "Google Cloud Storage", "Azure Blob Storage"],
+                icon: "bi-folder"
+            },
+            "Monitoring System": {
+                description: "Tracks system performance and alerts on anomalies.",
+                details: "Monitoring systems collect, process, and visualize metrics about system performance and health, enabling proactive issue detection and alerting.",
+                benefits: ["Real-time visibility", "Anomaly detection", "Trend analysis"],
+                caveats: ["Alert fatigue", "Data volume", "Configuration complexity"],
+                mitigations: ["Implement smart alerting", "Use efficient storage solutions", "Focus on actionable metrics"],
+                examples: ["Prometheus", "Grafana", "Datadog"],
+                icon: "bi-graph-up"
+            },
+            "Logging System": {
+                description: "Centralizes logs for troubleshooting and auditing.",
+                details: "Logging systems aggregate, store, and analyze log data from multiple sources, facilitating troubleshooting, security analysis, and compliance requirements.",
+                benefits: ["Centralized log access", "Advanced search capabilities", "Audit trail"],
+                caveats: ["High data volume", "Storage costs", "Indexing performance"],
+                mitigations: ["Implement log rotation", "Use structured logging", "Apply efficient indexing"],
+                examples: ["ELK Stack", "Splunk", "Google Cloud Logging"],
+                icon: "bi-journal-text"
+            },
+            "Search Engine": {
+                description: "Provides fast text search capabilities across large datasets.",
+                details: "Search engines index and query large volumes of text data, enabling fast and relevant search results with features like full-text search, faceting, and relevance ranking.",
+                benefits: ["Fast text retrieval", "Advanced query capabilities", "Relevance ranking"],
+                caveats: ["Index maintenance overhead", "Resource intensity", "Tuning complexity"],
+                mitigations: ["Optimize indexing strategy", "Implement proper sharding", "Use relevance tuning"],
+                examples: ["Elasticsearch", "Solr", "Algolia"],
+                icon: "bi-search"
+            },
+            "Data Warehouse": {
+                description: "Supports analytics and business intelligence on large datasets.",
+                details: "Data warehouses store large volumes of structured data optimized for complex analytical queries, supporting business intelligence and reporting needs.",
+                benefits: ["Optimized for analytics", "Historical data analysis", "Integrated data from multiple sources"],
+                caveats: ["High storage costs", "ETL complexity", "Query performance tuning"],
+                mitigations: ["Implement columnar storage", "Use efficient data modeling", "Apply query optimization"],
+                examples: ["Snowflake", "Amazon Redshift", "Google BigQuery"],
+                icon: "bi-archive"
+            }
         };
 
         // Function to get form values
@@ -239,7 +696,9 @@
                 microservices: document.querySelector('input[name="microservices"]:checked').value,
                 caching: document.querySelector('input[name="caching"]:checked').value,
                 content: document.querySelector('input[name="content"]:checked').value,
-                logging: document.querySelector('input[name="logging"]:checked').value
+                logging: document.querySelector('input[name="logging"]:checked').value,
+                analytics: document.querySelector('input[name="analytics"]:checked').value,
+                search: document.querySelector('input[name="search"]:checked').value
             };
         }
 
@@ -248,48 +707,56 @@
             const recommendations = {};
             
             if (formValues.traffic === "high") {
-                recommendations["Load Balancer"] = componentDatabase["Load Balancer"];
+                recommendations["Load Balancer"] = componentDatabase["Load Balancer"].description;
             }
             
             if (formValues.availability === "yes") {
-                recommendations["Data Replication"] = componentDatabase["Data Replication"];
+                recommendations["Data Replication"] = componentDatabase["Data Replication"].description;
             }
             
             if (formValues.consistency === "strong") {
-                recommendations["SQL Database"] = componentDatabase["SQL Database"];
+                recommendations["SQL Database"] = componentDatabase["SQL Database"].description;
             } else if (formValues.consistency === "eventual") {
-                recommendations["NoSQL Database"] = componentDatabase["NoSQL Database"];
+                recommendations["NoSQL Database"] = componentDatabase["NoSQL Database"].description;
             }
             
             if (formValues.latency === "yes") {
-                recommendations["Cache"] = componentDatabase["Cache"];
-                recommendations["In-Memory Database"] = componentDatabase["In-Memory Database"];
+                recommendations["Cache"] = componentDatabase["Cache"].description;
+                recommendations["In-Memory Database"] = componentDatabase["In-Memory Database"].description;
             }
             
             if (formValues.realtime === "yes") {
-                recommendations["Message Broker"] = componentDatabase["Message Broker"];
-                recommendations["Data Streaming Platform"] = componentDatabase["Data Streaming Platform"];
+                recommendations["Message Broker"] = componentDatabase["Message Broker"].description;
+                recommendations["Data Streaming Platform"] = componentDatabase["Data Streaming Platform"].description;
             }
             
             if (formValues.microservices === "yes") {
-                recommendations["API Gateway"] = componentDatabase["API Gateway"];
-                recommendations["Service Registry"] = componentDatabase["Service Registry"];
-                recommendations["Service Mesh"] = componentDatabase["Service Mesh"];
-                recommendations["Distributed Tracing"] = componentDatabase["Distributed Tracing"];
+                recommendations["API Gateway"] = componentDatabase["API Gateway"].description;
+                recommendations["Service Registry"] = componentDatabase["Service Registry"].description;
+                recommendations["Service Mesh"] = componentDatabase["Service Mesh"].description;
+                recommendations["Distributed Tracing"] = componentDatabase["Distributed Tracing"].description;
             }
             
             if (formValues.caching === "yes" && !recommendations["Cache"]) {
-                recommendations["Cache"] = componentDatabase["Cache"];
+                recommendations["Cache"] = componentDatabase["Cache"].description;
             }
             
             if (formValues.content === "yes") {
-                recommendations["CDN"] = componentDatabase["CDN"];
-                recommendations["File Storage"] = componentDatabase["File Storage"];
+                recommendations["CDN"] = componentDatabase["CDN"].description;
+                recommendations["File Storage"] = componentDatabase["File Storage"].description;
             }
             
             if (formValues.logging === "yes") {
-                recommendations["Monitoring System"] = componentDatabase["Monitoring System"];
-                recommendations["Logging System"] = componentDatabase["Logging System"];
+                recommendations["Monitoring System"] = componentDatabase["Monitoring System"].description;
+                recommendations["Logging System"] = componentDatabase["Logging System"].description;
+            }
+            
+            if (formValues.analytics === "yes") {
+                recommendations["Data Warehouse"] = componentDatabase["Data Warehouse"].description;
+            }
+            
+            if (formValues.search === "yes") {
+                recommendations["Search Engine"] = componentDatabase["Search Engine"].description;
             }
             
             return recommendations;
@@ -318,17 +785,64 @@
             `;
             
             for (const [component, description] of Object.entries(recommendations)) {
+                const componentInfo = componentDatabase[component];
                 const componentDiv = document.createElement('div');
                 componentDiv.className = 'recommendation-item';
                 componentDiv.innerHTML = `
-                    <h5 class="mb-2">
-                        <i class="bi bi-gear me-2"></i>
-                        ${component}
-                    </h5>
-                    <p class="mb-0">${description}</p>
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h5 class="mb-0">
+                            <i class="bi ${componentInfo.icon || 'bi-gear'} me-2"></i>
+                            ${component}
+                        </h5>
+                        <button class="btn btn-sm btn-outline-primary toggle-details">
+                            Details <i class="bi bi-chevron-down collapse-icon"></i>
+                        </button>
+                    </div>
+                    <p class="mb-2">${description}</p>
+                    <div class="component-details">
+                        <p><strong>Description:</strong> ${componentInfo.details}</p>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <h6>Benefits</h6>
+                                <ul class="mb-3">
+                                    ${componentInfo.benefits.map(benefit => `<li>${benefit}</li>`).join('')}
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Caveats</h6>
+                                <ul class="mb-3">
+                                    ${componentInfo.caveats.map(caveat => `<li>${caveat}</li>`).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                        <h6>Mitigations</h6>
+                        <ul class="mb-3">
+                            ${componentInfo.mitigations.map(mitigation => `<li>${mitigation}</li>`).join('')}
+                        </ul>
+                        <h6>Examples</h6>
+                        <div>
+                            ${componentInfo.examples.map(example => `<span class="badge-component">${example}</span>`).join('')}
+                        </div>
+                    </div>
                 `;
                 resultsContainer.appendChild(componentDiv);
             }
+            
+            // Add event listeners for the detail toggle buttons
+            document.querySelectorAll('.toggle-details').forEach(button => {
+                button.addEventListener('click', function() {
+                    const details = this.closest('.recommendation-item').querySelector('.component-details');
+                    const icon = this.querySelector('.collapse-icon');
+                    
+                    if (details.style.display === 'block') {
+                        details.style.display = 'none';
+                        icon.classList.remove('rotated');
+                    } else {
+                        details.style.display = 'block';
+                        icon.classList.add('rotated');
+                    }
+                });
+            });
         }
 
         // Form submission handler
