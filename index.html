@@ -39,6 +39,14 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
         
+        .form-card {
+            background-color: white;
+        }
+        
+        .result-card {
+            background-color: white;
+        }
+        
         .recommendation-item {
             background-color: #f8f9fa;
             border-radius: 8px;
@@ -89,6 +97,39 @@
             font-weight: bold;
         }
         
+        #calculator-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .calculation-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        
+        .info-icon {
+            color: var(--accent-color);
+            cursor: pointer;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+        
+        .social-links a {
+            color: white;
+            margin-right: 15px;
+            font-size: 20px;
+        }
+        
         .component-details {
             display: none;
             background-color: #f0f8ff;
@@ -119,6 +160,16 @@
         .table-container {
             overflow-x: auto;
         }
+        
+        .sticky-top {
+            top: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .sticky-top {
+                position: relative;
+            }
+        }
     </style>
 </head>
 <body>
@@ -139,6 +190,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#reference-section">References</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#calculator-section">Calculations</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -149,7 +203,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-8">
-                    <h1 class="fw-bold">System Design Component Recommender</h1>
+                    <h1 class="fw-bold">System Design Recommender</h1>
                     <p class="lead">Select your requirements to get personalized system design component recommendations with explanations, caveats, and mitigation strategies.</p>
                 </div>
                 <div class="col-lg-4 text-center">
@@ -162,8 +216,8 @@
     <div class="container my-5">
         <div class="row">
             <!-- Form Section -->
-            <div class="col-lg-5" id="form-section">
-                <div class="card">
+            <div class="col-lg-4" id="form-section">
+                <div class="card form-card sticky-top">
                     <div class="card-header bg-white">
                         <h4 class="mb-0">System Requirements</h4>
                     </div>
@@ -305,8 +359,8 @@
             </div>
             
             <!-- Results Section -->
-            <div class="col-lg-7">
-                <div class="card mb-4">
+            <div class="col-lg-8">
+                <div class="card result-card mb-4">
                     <div class="card-header bg-white">
                         <h4 class="mb-0">Recommended Components</h4>
                     </div>
@@ -414,6 +468,11 @@
                                                 <td>1 KB</td>
                                             </tr>
                                             <tr>
+                                                <td>16</td>
+                                                <td>65 thousand</td>
+                                                <td>64 KB</td>
+                                            </tr>
+                                            <tr>
                                                 <td>20</td>
                                                 <td>1 million</td>
                                                 <td>1 MB</td>
@@ -424,9 +483,19 @@
                                                 <td>1 GB</td>
                                             </tr>
                                             <tr>
+                                                <td>32</td>
+                                                <td>4 billion</td>
+                                                <td>4 GB</td>
+                                            </tr>
+                                            <tr>
                                                 <td>40</td>
                                                 <td>1 trillion</td>
                                                 <td>1 TB</td>
+                                            </tr>
+                                            <tr>
+                                                <td>50</td>
+                                                <td>1 quadrillion</td>
+                                                <td>1 PB</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -435,18 +504,24 @@
                                 <h5 class="mt-4">Latency Comparison Numbers</h5>
                                 <ul class="list-group">
                                     <li class="list-group-item">L1 cache can be accessed 14x faster than L2 cache.</li>
+                                    <li class="list-group-item">Main memory access is 20x slower than L2, 200x slower than L1.</li>
                                     <li class="list-group-item">Read sequentially from main memory at 4 GB/sec.</li>
                                     <li class="list-group-item">Read randomly/sequentially from SSD at ~ 1 GB/sec.</li>
                                     <li class="list-group-item">Read sequentially from disk at 30 MB/sec.</li>
+                                    <li class="list-group-item">Send data over 1 Gbps network at 100 MB/sec.</li>
                                     <li class="list-group-item">Round-trips within a data center at 2,000 trips/sec.</li>
+                                    <li class="list-group-item">World-wide round trips at 6-7 trips/sec.</li>
                                 </ul>
                                 
                                 <h5 class="mt-4">Request Calculations</h5>
                                 <ul class="list-group">
                                     <li class="list-group-item">2.5 million seconds per month</li>
                                     <li class="list-group-item">1 million reqs/month → 0.4 reqs/sec</li>
+                                    <li class="list-group-item">2.6 million reqs/month → 1 reqs/sec</li>
+                                    <li class="list-group-item">5 million reqs/month → 2 reqs/sec</li>
                                     <li class="list-group-item">10 million reqs/month → 4 reqs/sec</li>
                                     <li class="list-group-item">100 million reqs/month → 40 reqs/sec</li>
+                                    <li class="list-group-item">1 billion reqs/month → 400 reqs/sec</li>
                                 </ul>
                             </div>
                             <div class="tab-pane fade" id="patterns" role="tabpanel">
@@ -480,6 +555,20 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                                                CQRS (Command Query Responsibility Segregation)
+                                            </button>
+                                        </h2>
+                                        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#patternAccordion">
+                                            <div class="accordion-body">
+                                                <p>CQRS is a pattern that separates read and update operations for a data store. This pattern can maximize performance, scalability, and security.</p>
+                                                <p><strong>Benefits:</strong> Optimized read and write operations, scalability, independent scaling.</p>
+                                                <p><strong>Challenges:</strong> Increased complexity, eventual consistency, multiple models to maintain.</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -487,17 +576,92 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Calculator Section -->
+        <div id="calculator-section" class="my-5">
+            <h3 class="mb-4">System Design Calculator</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header bg-white">
+                            <h5 class="mb-0">Storage Calculator</h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="storage-calculator">
+                                <div class="mb-3">
+                                    <label for="data-size" class="form-label">Data Size (bytes per record)</label>
+                                    <input type="number" class="form-control" id="data-size" value="1000">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="num-records" class="form-label">Number of Records</label>
+                                    <input type="number" class="form-control" id="num-records" value="1000000">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="growth-rate" class="form-label">Monthly Growth Rate (%)</label>
+                                    <input type="number" class="form-control" id="growth-rate" value="5">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="redundancy-factor" class="form-label">Redundancy Factor</label>
+                                    <select class="form-select" id="redundancy-factor">
+                                        <option value="1">No redundancy (1x)</option>
+                                        <option value="2" selected>2x (one replica)</option>
+                                        <option value="3">3x (two replicas)</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Calculate</button>
+                            </form>
+                            <div id="storage-result" class="mt-3"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header bg-white">
+                            <h5 class="mb-0">Throughput Calculator</h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="throughput-calculator">
+                                <div class="mb-3">
+                                    <label for="daily-active-users" class="form-label">Daily Active Users</label>
+                                    <input type="number" class="form-control" id="daily-active-users" value="100000">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="requests-per-user" class="form-label">Requests per User per Day</label>
+                                    <input type="number" class="form-control" id="requests-per-user" value="10">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="read-write-ratio" class="form-label">Read:Write Ratio</label>
+                                    <select class="form-select" id="read-write-ratio">
+                                        <option value="1">1:1</option>
+                                        <option value="5" selected>5:1</option>
+                                        <option value="10">10:1</option>
+                                        <option value="100">100:1</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="peak-factor" class="form-label">Peak Factor (multiple of avg)</label>
+                                    <input type="number" class="form-control" id="peak-factor" value="2">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Calculate</button>
+                            </form>
+                            <div id="throughput-result" class="mt-3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <footer class="bg-dark text-white py-4 mt-5">
+    <!-- Footer -->
+    <footer>
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h5>System Design Component Recommender</h5>
+                    <h5>System Design Recommender</h5>
                     <p>A tool to help with system design decisions based on your requirements.</p>
                 </div>
                 <div class="col-md-3">
-                    <h5>Resources</h5>
+                    <h5>Other Resources</h5>
                     <ul class="list-unstyled">
                         <li><a href="https://github.com/donnemartin/system-design-primer" class="text-white">System Design Primer</a></li>
                         <li><a href="https://gist.github.com/mwakaba2/8ad25dda8c71fe529855994c70743733" class="text-white">System Design Numbers</a></li>
@@ -506,20 +670,22 @@
                 <div class="col-md-3">
                     <h5>Connect</h5>
                     <div class="social-links">
-                        <a href="https://github.com" class="text-white me-3"><i class="bi bi-github"></i></a>
-                        <a href="https://twitter.com" class="text-white me-3"><i class="bi bi-twitter"></i></a>
-                        <a href="https://linkedin.com" class="text-white"><i class="bi bi-linkedin"></i></a>
+                        <a href="https://github.com/bhavul"><i class="bi bi-github"></i></a>
+                        <a href="https://x.com/BhavulGauri"><i class="bi bi-twitter"></i></a>
+                        <a href="https://www.linkedin.com/in/bhavul/"><i class="bi bi-linkedin"></i></a>
+                        <a href="https://buymeacoffee.com/bhavul" title="Buy Me a Coffee"><i class="bi bi-cup-hot"></i></a>
                     </div>
                 </div>
             </div>
             <hr class="mt-4 mb-3" style="background-color: rgba(255,255,255,0.2);">
-            <p class="text-center mb-0">&copy; 2025 System Design Component Recommender</p>
+            <p class="text-center mb-0">&copy; 2025 System Design Recommender. Created with ❤️ by Bhavul Gauri.</p>
+            <p class="text-center mb-0"><a href="https://buymeacoffee.com/bhavul" class="text-white ms-2"><i class="bi bi-cup-hot"></i>Buy me a coffee</a></p>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Enhanced component database with details
+        // System components database with expanded information
         const componentDatabase = {
             "Load Balancer": {
                 description: "Distributes high traffic to maintain availability.",
@@ -851,6 +1017,63 @@
             const formValues = getFormValues();
             const recommendations = generateRecommendations(formValues);
             displayRecommendations(recommendations);
+        });
+
+        // Storage calculator
+        document.getElementById('storage-calculator').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const dataSize = parseFloat(document.getElementById('data-size').value);
+            const numRecords = parseFloat(document.getElementById('num-records').value);
+            const growthRate = parseFloat(document.getElementById('growth-rate').value) / 100;
+            const redundancyFactor = parseFloat(document.getElementById('redundancy-factor').value);
+            
+            const initialStorageBytes = dataSize * numRecords * redundancyFactor;
+            const initialStorageGB = initialStorageBytes / (1024 * 1024 * 1024);
+            
+            const oneYearStorageBytes = initialStorageBytes * Math.pow(1 + growthRate, 12);
+            const oneYearStorageGB = oneYearStorageBytes / (1024 * 1024 * 1024);
+            
+            const result = document.getElementById('storage-result');
+            result.innerHTML = `
+                <div class="alert alert-info">
+                    <p><strong>Initial Storage Needed:</strong> ${initialStorageGB.toFixed(2)} GB</p>
+                    <p><strong>Storage After 1 Year:</strong> ${oneYearStorageGB.toFixed(2)} GB</p>
+                    <p class="mb-0"><strong>With ${redundancyFactor}x redundancy factor</strong></p>
+                </div>
+            `;
+        });
+
+        // Throughput calculator
+        document.getElementById('throughput-calculator').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const dau = parseFloat(document.getElementById('daily-active-users').value);
+            const reqPerUser = parseFloat(document.getElementById('requests-per-user').value);
+            const readWriteRatio = parseFloat(document.getElementById('read-write-ratio').value);
+            const peakFactor = parseFloat(document.getElementById('peak-factor').value);
+            
+            const totalDailyRequests = dau * reqPerUser;
+            const avgReqPerSec = totalDailyRequests / 86400; // seconds in a day
+            const peakReqPerSec = avgReqPerSec * peakFactor;
+            
+            const readRatio = readWriteRatio / (readWriteRatio + 1);
+            const writeRatio = 1 / (readWriteRatio + 1);
+            
+            const avgReadPerSec = avgReqPerSec * readRatio;
+            const avgWritePerSec = avgReqPerSec * writeRatio;
+            const peakReadPerSec = peakReqPerSec * readRatio;
+            const peakWritePerSec = peakReqPerSec * writeRatio;
+            
+            const result = document.getElementById('throughput-result');
+            result.innerHTML = `
+                <div class="alert alert-info">
+                    <p><strong>Average Throughput:</strong> ${avgReqPerSec.toFixed(2)} req/sec</p>
+                    <p><strong>Peak Throughput:</strong> ${peakReqPerSec.toFixed(2)} req/sec</p>
+                    <p><strong>Average Read/Write:</strong> ${avgReadPerSec.toFixed(2)} reads/sec, ${avgWritePerSec.toFixed(2)} writes/sec</p>
+                    <p class="mb-0"><strong>Peak Read/Write:</strong> ${peakReadPerSec.toFixed(2)} reads/sec, ${peakWritePerSec.toFixed(2)} writes/sec</p>
+                </div>
+            `;
         });
     </script>
 </body>
