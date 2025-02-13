@@ -7,11 +7,21 @@
   System Design Studying can be daunting. It can be useful to have a table to know what problems requires what components, and for those components what caveats they bring and how to mitigate them. This repository gives you a table to serve just this purpose.
 </p>
 
+
 ----
 
 <p align="center"> Your ⭐ on the repo would bring me joy, validate the effort and motivate me to do more like this. ✨ </p>
 
 ----
+
+**Update 01/25:** Now it is available as an easy-to-use website where you can put in your requirements, and the tool helps you with system design decisions.  
+URL: https://bhavul.github.io/System-Design-Cheatsheet/ 
+
+![Demo System Design Recommender](demo.gif)
+
+----
+
+## System Deisgn Components Primer
 
 | Use Cases/Problems                                                                                                                 | System Design Questions                                                                                     | ⭐ Component                      | What it solves                                                  | Caveats/Issues                                      | Mitigations                                                                                                                                        | Examples of Tools                           |
 | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ------------------------------- | ----------------------------------------------------------- | --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------- |
